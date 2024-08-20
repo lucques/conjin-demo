@@ -1,0 +1,5 @@
+deployments/*/docker_volumes
+deployments/*/target
+
+# Config files
+.vscode/*
