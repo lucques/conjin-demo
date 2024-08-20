@@ -2,26 +2,20 @@
 -- Locations of conjin framework, app, deployment --
 ----------------------------------------------------
 
-let t              = https://raw.githubusercontent.com/lucques/conjin/44f2660f9626a3321e7efc6d9cd633b5f70e03dc/build-tools/tools-external.dhall
+let t              = https://raw.githubusercontent.com/lucques/conjin/eed045a0b2d7921a0af6d31f70c6d41c80efd2bf/build-tools/tools-external.dhall -- 2024-08
 let T              = t.types
 let P              = t.prelude
 
-let conjinDir      = ../CONJIN_DIR      as Text
-let appDir         = ../APP_DIR         as Text
-let deploymentsDir = ../DEPLOYMENTS_DIR as Text
-
-let deplName       = "lcd"
-let deplDir        = deploymentsDir ++ "/" ++ deplName
+let conjinDir      = ./CONJIN_DIR      as Text
+let appDir         = ./APP_DIR         as Text
+let deploymentsDir = ./DEPLOYMENTS_DIR as Text
 
 
 ------------
 -- Config --
 ------------
 
-let db = t.makeDefaultDockerDb appDir deplDir
-let dbModule = t.makeDbModuleFromDockerDb db
-
-let bootstrap       = t.makeModule "bootstrap"        True True
+let bootstrap = t.makeModule "bootstrap"        True True
 
 let genericTemplate = t.makeModule "template-generic" True False
 
@@ -112,21 +106,21 @@ let authorization = {
         , t.grantPreprocPrivToUser "preprocess"
     ]
     , actors2targetRules = [
-        , t.allowViewActionForUser (P.List.empty Text) "admin"
-        , t.allowViewActionForUser (P.List.empty Text) "linkchecker"
+        , t.allowViewActionForUser (P.List.empty Text) "guest"
     ]
 }
 
 in
 
-t.makeDefaultDockerNginxDepl
-    deplName
-    conjinDir
-    appDir
-    deplDir
-    authentication
-    authorization
-    (Some db)
-    (t.moduleValueToModule interbookTemplate)
-    (modules # [dbModule])
-: T.DockerNginxDepl
+{
+  , t
+
+  , conjinDir
+  , appDir
+  , deploymentsDir
+
+  , mainTemplate = interbookTemplate
+  , modules
+  , authentication
+  , authorization
+}

@@ -2,5 +2,5 @@
 
 cd "$(dirname "$(readlink -f "$0")")/"
 
-SCRIPT_PATH="$(cat ../CONJIN_DIR)/build-tools/build-deployment"
+SCRIPT_PATH="$(cat ../../CONJIN_DIR)/build-tools/build-deployment"
 "$SCRIPT_PATH" build-docker-nginx-depl ./config.dhall -i

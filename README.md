@@ -1,6 +1,6 @@
 # Conjin Demo
 
-This website contains a demo of a [conjin project](https://github.com/lucques/conjin). The goal is to demonstrate as many features and modules as possible, each as isolated as possible. It therefore serves also as some kind of unit test suite:
+This website contains a demo of a [conjin project](https://github.com/lucques/conjin). You can visit the deployed version here: [https://lukas.convnet.de/conjin-demo/](https://lukas.convnet.de/conjin-demo/). The goal is to demonstrate as many features and modules as possible, each as isolated as possible. It therefore serves also as some kind of unit test suite:
 - Run `lcd-linkchecker` to check for PHP errors (as well as broken links)
 - View the pages to check for visual errors
 
@@ -12,11 +12,13 @@ This website contains a demo of a [conjin project](https://github.com/lucques/co
     - [./deployments/APP_DIR](./deployments/APP_DIR) (here: `/repos/conjin-demo`)
     - [./deployments/CONJIN_DIR](./deployments/CONJIN_DIR) (here: `repos/conjin`)
     - [./deployments/DEPLOYMENTS_DIR](./deployments/DEPLOYMENTS_DIR) (here: `repos/conjin-demo/`)
+    - [./deployments/dcd/src/RCLONE_CONFIG_PATH](./deployments/dcd/src/RCLONE_CONFIG_PATH) (path to config file)
 4. Follow installation instructions of the [conjin project](https://github.com/lucques/conjin/).
 
 
 ## Abbreviations
 - `lcd` deployment: "local conjin-demo"
+- `dcd` deployment: "deployed conjin-demo"
 
 
 ## License
