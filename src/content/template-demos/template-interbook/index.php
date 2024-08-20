@@ -4,7 +4,7 @@
         $c->activate_module('nav-build');
 
         $c->activate_module('title');
-        $c->run_macro('title', 'set', 'template-interbook', is_part_of_content: false);
+        $c->run_macro('title', 'set', plain: 'template-interbook (Custom title; without h1)', plain_short: 'template-interbook', is_part_of_content: false);
     };
 ?>
 

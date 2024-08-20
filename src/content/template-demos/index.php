@@ -8,8 +8,8 @@
         $c->activate_module('nav-build');
 
         $c->add_subpage('template-generic');
-        $c->add_subpage('template-navigable');
         $c->add_subpage('template-bootstrapped');
+        $c->add_subpage('template-navigable');
         $c->add_subpage('template-interbook');
         $c->add_subpage('2024-08-18.template-exam');
     };

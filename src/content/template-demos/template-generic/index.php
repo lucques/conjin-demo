@@ -5,7 +5,7 @@
         $c->activate_module('nav-build');
 
         $c->activate_module('title');
-        $c->run_macro('title', 'set', 'template-generic');
+        $c->run_macro('title', 'set', plain: 'template-generic (Custom title)', plain_short: 'template-generic');
     };
 ?>
 

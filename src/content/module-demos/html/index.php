@@ -7,7 +7,6 @@
         $c->run_macro('title', 'set', 'html');
         
         $c->activate_module('html');
-
     };
 ?>
 

@@ -1,6 +1,10 @@
 <?
     $preprocess = function (TargetPreprocessContext $c) {
         $c->activate_template('template-navigable');
+
+        $c->activate_module('nav-build');
+        $c->activate_module('title');
+        $c->run_macro('title', 'set', 'template-navigable (custom title)');
     };
 ?>
 
