@@ -21,6 +21,11 @@ let rcloneRemote = {
     , configPath = ./RCLONE_CONFIG_PATH as Text
 }
 
+let authentication = {
+    , loginWithoutUserName = True
+    , users2passwords = ./password_list.dhall
+}
+
 in
 
 t.makeDefaultDockerSyncDepl
@@ -28,10 +33,10 @@ t.makeDefaultDockerSyncDepl
     common.conjinDir
     common.appDir
     deplDir
-    common.authentication
+    authentication
     common.authorization
     (None T.ServerDb)
-    (t.moduleValueToModule common.mainTemplate)
+    common.localBareModules
     common.modules
     host
     pathBase

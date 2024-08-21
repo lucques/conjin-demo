@@ -7,7 +7,7 @@
         $c->run_macro('title', 'set', 'db');
 
         // Deactivated for now
-        // $c->activate_module('db');
+        $c->activate_module('db');
     };
 ?>
 
@@ -21,7 +21,7 @@
 </p>
 
 <?
-    //print_sql_result('eisdiele', 'SELECT * FROM sorte');
+    print_sql_result('eisdiele', 'SELECT * FROM sorte');
 ?>
 
 <? }; ?>

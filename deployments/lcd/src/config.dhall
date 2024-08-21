@@ -9,11 +9,20 @@ let P = common.t.prelude
 -- Config --
 ------------
 
-let deplName       = "lcd"
-let deplDir        = common.deploymentsDir ++ "/" ++ deplName
+let deplName = "lcd"
+let deplDir  = common.deploymentsDir ++ "/" ++ deplName
 
 let db = t.makeDefaultDockerDb common.appDir deplDir
-let dbModule = t.makeDbModuleFromDockerDb db
+
+let authentication = {
+    , loginWithoutUserName = True
+    , users2passwords = [
+        , t.assignUser2Password "root"        "rutus"
+        , t.assignUser2Password "admin"       "admin"
+        , t.assignUser2Password "preprocess"  "preprocess"
+        , t.assignUser2Password "linkchecker" "linkchecker"
+    ]
+}
 
 in
 
@@ -22,9 +31,9 @@ t.makeDefaultDockerNginxDepl
     common.conjinDir
     common.appDir
     deplDir
-    common.authentication
+    authentication
     common.authorization
     (Some db)
-    (t.moduleValueToModule common.mainTemplate)
-    (common.modules # [dbModule])
+    common.localBareModules
+    common.modules
 : T.DockerNginxDepl

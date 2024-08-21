@@ -2,7 +2,7 @@
 -- Locations of conjin framework, app, deployment --
 ----------------------------------------------------
 
-let t              = https://raw.githubusercontent.com/lucques/conjin/eed045a0b2d7921a0af6d31f70c6d41c80efd2bf/build-tools/tools-external.dhall -- 2024-08
+let t              = ./EXTERNAL_TOOLS_PATH
 let T              = t.types
 let P              = t.prelude
 
@@ -11,91 +11,35 @@ let appDir         = ./APP_DIR         as Text
 let deploymentsDir = ./DEPLOYMENTS_DIR as Text
 
 
-------------
--- Config --
-------------
-
-let bootstrap = t.makeModule "bootstrap"        True True
-
-let genericTemplate = t.makeModule "template-generic" True False
+-------------------
+-- Common config --
+-------------------
 
 let navigableTemplate = {
-  , location = { dirName = "template-navigable", isShared = True, isExternal = False }
-  , config = t.prelude.JSON.null
+  , bare = T.BareModule.TemplateNavigable {=}
   , compileScss = True
-  , scssModuleDeps = [ bootstrap.location ]
-}
+  , config = t.prelude.JSON.null
+}: T.Module
 
 let bootstrappedTemplate = {
-  , location = { dirName = "template-bootstrapped", isShared = True, isExternal = False }
-  , config = t.prelude.JSON.null
+  , bare = T.BareModule.TemplateBootstrapped {=}
   , compileScss = True
-  , scssModuleDeps = [ bootstrap.location ]
-}
+  , config = t.prelude.JSON.null
+}: T.Module
 
 let interbookTemplate = {
-  , location = { dirName = "template-interbook", isShared = True, isExternal = False }
-  , config = t.prelude.JSON.null
+  , bare = T.BareModule.TemplateInterbook {=}
   , compileScss = True
-  , scssModuleDeps = [ bootstrap.location, bootstrappedTemplate.location, navigableTemplate.location ]
-}
+  , config = t.prelude.JSON.null
+}: T.Module
 
 let examTemplate = {
-  , location = { dirName = "template-exam", isShared = True, isExternal = False }
-  , config = t.prelude.JSON.null
+  , bare = T.BareModule.TemplateExam {=}
   , compileScss = True
-  , scssModuleDeps = [ bootstrap.location, bootstrappedTemplate.location, navigableTemplate.location ]
-}
+  , config = t.prelude.JSON.null
+}: T.Module
 
-let modules =
-    (t.makeModules True False  -- Shared & internal
-      [
-      , "anchors"
-      , "doc-extensions"
-      , "exercise"
-      , "favicons"
-      , "footnotes"
-      , "grading"
-      , "html"
-      , "locale-de"
-      , "mathjax-extensions"
-      , "math-arith"
-      , "math-logic"
-      , "nav-common"
-      , "nav-view"
-      , "nav-build"
-      , "print-mode"
-      , "references"
-      , "sol-mode"
-      , "source"
-      , "sql-js-inline"
-      , "sync-dims"
-      , "template-generic"
-      , "title"
-      , "timetable"
-      ])
-    #
-    (t.makeModules True True  -- Shared & external
-      [
-      , "bootstrap-icons"
-      , "fullcalendar"
-      , "mathjax"
-      , "prism"
-      , "sql-js"
-      , "paged-js"
-      ])
-    #
-    [ genericTemplate, bootstrap, bootstrappedTemplate, interbookTemplate, examTemplate, navigableTemplate ]
-
-let authentication = {
-    , loginWithoutUserName = True
-    , users2passwords = [
-        , t.assignUser2Password "root"        "rutus"
-        , t.assignUser2Password "admin"       "asdf"
-        , t.assignUser2Password "preprocess"  "preprocess"
-        , t.assignUser2Password "linkchecker" "linkchecker"
-    ]
-}
+let modules = [ navigableTemplate, bootstrappedTemplate, interbookTemplate, examTemplate ]
 
 let authorization = {
     , rootUser  = "root"
@@ -119,8 +63,7 @@ in
   , appDir
   , deploymentsDir
 
-  , mainTemplate = interbookTemplate
+  , localBareModules = P.List.empty T.LocalBareModule
   , modules
-  , authentication
   , authorization
 }
