@@ -14,7 +14,7 @@ This website contains a demo of a [conjin project](https://github.com/lucques/co
     - [./deployments/DEPLOYMENTS_DIR](./deployments/DEPLOYMENTS_DIR) (contains path, here: `repos/conjin-demo/`)
     - [./deployments/EXTERNAL_TOOLS_PATH](./deployments/EXTERNAL_TOOLS_PATH) (contains path, here: `repos/conjin/build-tools/tools-external.dhall`)
     - [./deployments/dcd/src/RCLONE_CONFIG_PATH](./deployments/dcd/src/RCLONE_CONFIG_PATH) (path to config file)
-    - [./deployments/password_list.dhall](./deployments/dcd/src/password_list.dhall) (of type `PasswordList`)
+    - [./deployments/dcd/src/password_list.dhall](./deployments/dcd/src/password_list.dhall) (of type `PasswordList`)
 4. Follow installation instructions of the [conjin project](https://github.com/lucques/conjin/).
 
 
