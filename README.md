@@ -1,3 +1,7 @@
+This demo project moved into the conjin repository at https://github.com/lucques/conjin
+The online deployment is at https://conjin.mainlab.site/
+
+
 # Conjin Demo
 
 This website contains a demo of a [conjin project](https://github.com/lucques/conjin). You can visit the deployed version here: [https://lukas.convnet.de/conjin-demo/](https://lukas.convnet.de/conjin-demo/). The goal is to demonstrate as many features and modules as possible, each as isolated as possible. It therefore serves also as some kind of unit test suite:
